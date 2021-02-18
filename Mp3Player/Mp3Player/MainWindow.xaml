@@ -7,7 +7,7 @@
         ResizeMode="NoResize"
         mc:Ignorable="d"
         Title="MP3 Player / Editor" Height="450" Width="800" SizeToContent="WidthAndHeight">
-
+    <!--Command Bindings-->
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Open" CanExecute="Open_CanExecute" Executed="Open_Executed" />
         <CommandBinding Command="MediaCommands.Play" CanExecute="Play_CanExecute" Executed="Play_Executed" />
@@ -15,7 +15,7 @@
         <CommandBinding Command="MediaCommands.Stop" CanExecute="Stop_CanExecute" Executed="Stop_Executed" />
     </Window.CommandBindings>
     <StackPanel Orientation="Horizontal">
-
+        <!--Main grid that holds all the content-->
         <Grid Margin="10,10,3.6,21">
 
             <Grid.RowDefinitions>
@@ -25,6 +25,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="44*"/>
             </Grid.ColumnDefinitions>
+            <!--Grid that holds the two side buttons, thrid commented out for lack of use.-->
             <Grid HorizontalAlignment="Right" Margin="0,-7,677.6,-0.2" VerticalAlignment="Top" Width="92" Height="396" Grid.RowSpan="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="67*"/>
@@ -47,7 +48,7 @@
                     </Viewbox>
                 </Button>-->
             </Grid>
-
+            <!--Grid for holding the top left control options-->
             <Grid HorizontalAlignment="Left" Height="16" Margin="0,-7,0,0" VerticalAlignment="Top" Width="762">
                 <Menu HorizontalAlignment="Left" Width="30" Height="16" VerticalAlignment="Top">
                     <MenuItem Header="File" FontSize="10" Height="16" Width="30" RenderTransformOrigin="0.484,0.504">
@@ -77,6 +78,7 @@
                     </MenuItem>
                 </Menu>
             </Grid>
+            <!--Grid with the Mp3 interaction buttons and slider-->
             <Grid HorizontalAlignment="Left"  Height="60" Margin="97,141.8,-0.4,0" VerticalAlignment="Top" Width="673" Grid.Row="1">
                 <Button HorizontalAlignment="Left" Command="MediaCommands.Play" VerticalAlignment="Top" Width="59" Height="50">
                     <Viewbox>
@@ -117,7 +119,7 @@
 
                 </Grid>
             </StackPanel>
-
+            <!--Hidden StackPanel holding the menu options for chainging the tag data.-->
             <StackPanel Background="Aquamarine" TextBlock.TextAlignment="Center" Name="tagEditor" Margin="0,-3,1.6,0" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2" Height="460" VerticalAlignment="Top" HorizontalAlignment="Right" Width="650" Visibility="Hidden">
 
                 <TextBlock FontSize="20" FontStyle="Italic" >Tag Editor</TextBlock>

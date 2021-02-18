@@ -22,7 +22,9 @@ namespace Mp3Player
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    /// 
+    /// https://www.wpf-tutorial.com/audio-video/how-to-creating-a-complete-audio-video-player/
+    /// A large portion of the MP3 Logic is from above site.
+    /// Including Execute/CanExecute Functions, timer, and slider logic.
 
     public partial class MainWindow : Window
     {
@@ -32,6 +34,8 @@ namespace Mp3Player
         private bool sliderInteractedWith = false;
         TagLib.File file = null;
         const string faultyYearStr = "Please enter a valid year.";
+        string regex = "[^0-9]+";
+        Match match;
 
         public MainWindow()
         {
@@ -101,7 +105,7 @@ namespace Mp3Player
         }
 
         private void Pause_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
+        {   
             e.CanExecute = mediaPlayerActive;
         }
 
@@ -168,8 +172,7 @@ namespace Mp3Player
         private void saveMetaData()
         {
             //making sure year input is valid
-            var regex = "[^0-9]+";
-            Match match = Regex.Match(meReleaseYear.Text, regex);
+            match = Regex.Match(meReleaseYear.Text, regex);
             if (match.Success)
             {
                 //make textbox red and display error in the box
