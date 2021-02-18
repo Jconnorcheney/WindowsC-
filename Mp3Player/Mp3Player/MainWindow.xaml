@@ -1,0 +1,138 @@
+﻿<Window x:Class="Mp3Player.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Mp3Player.UserControls"
+        ResizeMode="NoResize"
+        mc:Ignorable="d"
+        Title="MP3 Player / Editor" Height="450" Width="800" SizeToContent="WidthAndHeight">
+
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Open" CanExecute="Open_CanExecute" Executed="Open_Executed" />
+        <CommandBinding Command="MediaCommands.Play" CanExecute="Play_CanExecute" Executed="Play_Executed" />
+        <CommandBinding Command="MediaCommands.Pause" CanExecute="Pause_CanExecute" Executed="Pause_Executed" />
+        <CommandBinding Command="MediaCommands.Stop" CanExecute="Stop_CanExecute" Executed="Stop_Executed" />
+    </Window.CommandBindings>
+    <StackPanel Orientation="Horizontal">
+
+        <Grid Margin="10,10,3.6,21">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="187*"/>
+                <RowDefinition Height="202*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="44*"/>
+            </Grid.ColumnDefinitions>
+            <Grid HorizontalAlignment="Right" Margin="0,-7,677.6,-0.2" VerticalAlignment="Top" Width="92" Height="396" Grid.RowSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="67*"/>
+                    <ColumnDefinition Width="25*"/>
+                </Grid.ColumnDefinitions>
+                <Button Margin="10,245,9.8,0" Command="ApplicationCommands.Open" Height="115
+                        " VerticalAlignment="Top" Grid.ColumnSpan="2" >
+                    <Viewbox>
+                        <Image Source="{StaticResource openFileImage}"></Image>
+                    </Viewbox>
+                </Button>
+                <Button VerticalAlignment="Top" Height="115" Click="editMp3_Click" RenderTransformOrigin="0.551,3.008" Margin="10,125,9.8,0" Grid.ColumnSpan="2">
+                    <Viewbox>
+                        <Image Source="{StaticResource editImage}"></Image>
+                    </Viewbox>
+                </Button>
+                <!--<Button VerticalAlignment="Top" Height="115" Click="MusicButton_Click" RenderTransformOrigin="0.635,0.717" Margin="10,5,9.8,0" Grid.ColumnSpan="2">
+                    <Viewbox>
+                        <Image Source="{StaticResource musicNoteImage}"></Image>
+                    </Viewbox>
+                </Button>-->
+            </Grid>
+
+            <Grid HorizontalAlignment="Left" Height="16" Margin="0,-7,0,0" VerticalAlignment="Top" Width="762">
+                <Menu HorizontalAlignment="Left" Width="30" Height="16" VerticalAlignment="Top">
+                    <MenuItem Header="File" FontSize="10" Height="16" Width="30" RenderTransformOrigin="0.484,0.504">
+                        <MenuItem Header="Open MP3" Command="ApplicationCommands.Open" Name="openMp3"/>
+                        <MenuItem Header="Edit Current MP3" Click="editMp3_Click" Name="editMp3"/>
+                        <MenuItem Header="Quit" Click="MenuItem_Click"/>
+                    </MenuItem>
+                </Menu>
+                <Menu HorizontalAlignment="Left" Height="16" Margin="30,0,0,0" VerticalAlignment="Top" Width="30">
+                    <MenuItem Header="Edit" FontSize="10" Height="16" Width="30">
+                        <MenuItem Header="Edit Tag" Click="editMp3_Click"/>
+                    </MenuItem>
+                </Menu>
+                <Menu HorizontalAlignment="Left" Height="16" Margin="60,0,0,0" VerticalAlignment="Top" Width="40">
+                    <MenuItem Header="Media" FontSize="10" Height="16" Width="40" RenderTransformOrigin="0.5,0.5">
+                        <MenuItem.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform AngleY="0.306"/>
+                                <RotateTransform/>
+                                <TranslateTransform Y="0.128"/>
+                            </TransformGroup>
+                        </MenuItem.RenderTransform>
+                        <MenuItem Header="Play" Command="MediaCommands.Play"/>
+                        <MenuItem Header="Pause" Command="MediaCommands.Pause"/>
+                        <MenuItem Header="Stop" Command="MediaCommands.Stop"/>
+                    </MenuItem>
+                </Menu>
+            </Grid>
+            <Grid HorizontalAlignment="Left"  Height="60" Margin="97,141.8,-0.4,0" VerticalAlignment="Top" Width="673" Grid.Row="1">
+                <Button HorizontalAlignment="Left" Command="MediaCommands.Play" VerticalAlignment="Top" Width="59" Height="50">
+                    <Viewbox>
+                        <Image Source="{StaticResource playImage}"></Image>
+                    </Viewbox>
+                </Button>
+                <Button HorizontalAlignment="Left"  Command="MediaCommands.Stop" VerticalAlignment="Top" Width="55" Height="50" Margin="124,0,0,0">
+                    <Viewbox>
+                        <Image Source="{StaticResource stopImage}"></Image>
+                    </Viewbox>
+                </Button>
+                <Button HorizontalAlignment="Left" Command="MediaCommands.Pause" VerticalAlignment="Top" Width="55" Height="50" Margin="64,0,0,0">
+                    <Viewbox>
+                        <Image Source="{StaticResource pauseImage}"></Image>
+                    </Viewbox>
+                </Button>
+
+
+                <StatusBar HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="479" Margin="184,10,0,0">
+                    <StatusBarItem>
+                        <TextBlock Name="labelProgStatus">00:00:00</TextBlock>
+                    </StatusBarItem>
+                    <StatusBarItem HorizontalContentAlignment="Stretch">
+                        <Slider Name="sliProgress" Thumb.DragStarted="sliderDragStarted"  Thumb.DragCompleted="sliderDragCompleted" ValueChanged="sliderValueChanged"/>
+                    </StatusBarItem>
+                </StatusBar>
+            </Grid>
+            <MediaElement Name="mePlayer" LoadedBehavior="Manual" Stretch="None"  RenderTransformOrigin="0.5,0.5" Margin="102,14,9.6,59.8" Grid.RowSpan="2" />
+            <StackPanel HorizontalAlignment="Left" Height="310" VerticalAlignment="Top" Width="663" Margin="97,14,0,0" >
+                <Grid Margin="0,0,0.2,0" Height="309" >
+                    <StackPanel Orientation="Vertical" Margin="83,94,80,87" VerticalAlignment="Center" HorizontalAlignment="Center" Width="500" TextBlock.TextAlignment="Center" TextBlock.FontSize="24">
+                        <TextBlock x:Name="tbArtist"/>
+                        <TextBlock x:Name="tbSong"/>
+                        <TextBlock x:Name="tbAlbum"/>
+                        <TextBlock x:Name="tbYear"/>
+                    </StackPanel>
+
+
+                </Grid>
+            </StackPanel>
+
+            <StackPanel Background="Aquamarine" TextBlock.TextAlignment="Center" Name="tagEditor" Margin="0,-3,1.6,0" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2" Height="460" VerticalAlignment="Top" HorizontalAlignment="Right" Width="650" Visibility="Hidden">
+
+                <TextBlock FontSize="20" FontStyle="Italic" >Tag Editor</TextBlock>
+                <TextBlock>Song Name</TextBlock>
+                <TextBox Name="meSong"></TextBox>
+                <TextBlock>Artist Name</TextBlock>
+                <TextBox Name="meArtist"></TextBox>
+                <TextBlock>Album Name</TextBlock>
+                <TextBox Name="meAlbum"></TextBox>
+                <TextBlock>Release Year</TextBlock>
+                <TextBox Name="meReleaseYear"></TextBox>
+                <Button Click="dataChangebtn_Click" Name="dataChangebtn">Submit</Button>
+            </StackPanel>
+
+        </Grid>
+
+    </StackPanel>
+</Window>

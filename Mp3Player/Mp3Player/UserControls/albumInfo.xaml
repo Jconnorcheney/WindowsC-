@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="Mp3Player.UserControls.albumInfo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Mp3Player.UserControls"
+             mc:Ignorable="d" Height="177.158" Width="521.474">
+    <Grid Margin="0,0,0.6,-0.2" >
+        <StackPanel Orientation="Vertical" Margin="10,23,11,26" VerticalAlignment="Center" HorizontalAlignment="Center" Width="500" TextBlock.TextAlignment="Center" TextBlock.FontSize="24">
+            <TextBlock x:Name="tbArtist"/>
+            <TextBlock x:Name="tbSong"/>
+            <TextBlock x:Name="tbAlbum"/>
+            <TextBlock x:Name="tbYear"/>
+        </StackPanel>
+
+
+    </Grid>
+</UserControl>
